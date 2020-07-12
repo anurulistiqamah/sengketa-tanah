@@ -4,6 +4,8 @@ import notify from 'devextreme/ui/notify';
 import { Customer, FormsService } from './forms.service';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
+var CryptoJS = require("crypto-js");
+
 const sendRequest = function (value) {
     const validEmail = "test@dx-email.com";
     return new Promise((resolve) => {
@@ -73,11 +75,16 @@ export class FormsComponent {
             }
         }, "success", 3000);
         this.customer.date = this.customer.date.toLocaleDateString();
-        this.addRecord(this.customer);
+        
+        //Encrypt customer's data
+        var dataCustomer = CryptoJS.AES.encrypt(JSON.stringify(this.customer), '123').toString();
+        this.addRecord(dataCustomer);
+
         this.customer = null;
         e.preventDefault();
     }
 
+    //Push to firebase
     addRecord(value: any): void {
         this.record$.push(value);
     }
