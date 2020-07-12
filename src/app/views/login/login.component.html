@@ -1,0 +1,45 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card-group">
+
+            <div class="card p-4 py-5">
+              <div class="card-body text-center">
+                <div>
+                  <h2>Sign In</h2>
+                  <p class="text-muted">Sign In to your account</p>
+                  <button 
+                    type="button" 
+                    class="btn btn-primary mt-3" 
+                    (click)="authService.GoogleAuth()">
+                    <i class="fa fa-google"></i> Sign In With Google
+                  </button>
+
+                  <div class="row justify-content-center">
+                      <p class="px-0 py-2">Do not have an account? </p>
+                      <span 
+                        class="btn btn-link px-1" 
+                        (click)="authService.GoogleAuth()"> Register</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+              <div class="card-body text-center">
+                <div>
+                  <h2></h2>
+                  <p></p>
+                  <!-- <button type="button" class="btn btn-primary active mt-3" onclick="location.href='https://play.google.com/store/apps/details?id=com.indraazimi.pengeluaran'">Download Now!</button> -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

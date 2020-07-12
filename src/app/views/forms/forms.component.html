@@ -1,0 +1,129 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <form action="your-action" (submit)="onFormSubmit($event)">
+            <dx-form id="form"
+                [formData]="customer"
+                [readOnly]="false"
+                [showColonAfterLabel]="true"
+                [showValidationSummary]="true"
+                (onEditorPreparing)="onEditorPreparing($event)"
+                validationGroup="customerData">
+                <dxi-item itemType="group" caption="Data Personal">
+                    <dxi-item dataField="nama">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Nama diperlukan">
+                        </dxi-validation-rule>
+                        <dxi-validation-rule 
+                            type="pattern"
+                            [pattern]="namePattern"
+                            message="Nama mohon jangan menggunakan angka">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="telepon" helpText="Masukkan nomor telepon dengan format telepon INA"
+                        [editorOptions]="{ 
+                            mask: '+62 (X00) 000-00000',
+                            maskRules: phoneRules,
+                            useMaskedValue: true,
+                            maskInvalidMessage: 'Telepon harus menggunakan format telepon INA yang benar'
+                        }">
+                        <dxi-validation-rule 
+                            type="pattern"
+                            [pattern]="phonePattern"
+                            message="Telepon harus menggunakan format telepon INA yang benar">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                </dxi-item>
+
+                <dxi-item itemType="group" caption="Data Akta">
+                    <dxi-item dataField="layanan"
+                        editorType="dxSelectBox"
+                        [editorOptions]="{ dataSource: services }">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Layanan diperlukan">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="deskripsi" 
+                        editorType="dxTextArea" 
+                        [editorOptions]="{ height: 90 }" 
+                        [colSpan]="2">
+                    </dxi-item>
+
+                    <dxi-item dataField="nomorAkta" 
+                        caption="Nomor Akta" 
+                        editorType="dxNumberBox">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Nomor akta diperlukan">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="nomorBerkas" 
+                        caption="Nomor Berkas">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Nomor berkas diperlukan">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item 
+                        dataField="date"
+                        editorType="dxDateBox"
+                        [editorOptions]="{ 
+                            invalidDateMessage: 'The date must have the following format: MM/dd/yyyy',
+                            max: maxDate }">
+                        <dxo-label
+                            text="Tanggal Order">
+                        </dxo-label>
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Tanggal order diperlukan">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                    
+                    <dxi-item 
+                        dataField="biaya" 
+                        caption="Biaya" 
+                        editorType="dxNumberBox" 
+                        format="Rp ##,##0.##"
+                        [editorOptions]="{ format: format }">
+                        <dxi-validation-rule type="numeric"></dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item 
+                        itemType="simple"
+                        dataField="accepted"
+                        editorType="dxCheckBox"
+                        [editorOptions]="{ 
+                            text: 'Saya menyetujui syarat dan ketentuan yang berlaku',
+                            value: false
+                        }">
+                        <dxo-label
+                            [visible]="false">
+                        </dxo-label>
+                        <dxi-validation-rule 
+                            type="compare"
+                            [comparisonTarget]="checkComparison"
+                            message="Saya menyetujui syarat dan ketentuan yang berlaku">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                </dxi-item>
+        
+                <dxi-item 
+                    itemType="button"
+                    horizontalAlignment="right"
+                    [buttonOptions]="buttonOptions">
+                </dxi-item>
+            </dx-form>
+          </form>
+        </div>
+      </div>
+    </div><!--/.col-->
+  </div><!--/.row-->
+</div>
